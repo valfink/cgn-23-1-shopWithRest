@@ -29,6 +29,11 @@ public class ShopController {
         return shopService.addProduct(product);
     }
 
+    @DeleteMapping("products/{id}")
+    public List<Order> deleteProduct(@PathVariable int id) {
+        return shopService.deleteProduct(id);
+    }
+
     @GetMapping("orders")
     public List<Order> listOrders() {
         return shopService.listOrders();

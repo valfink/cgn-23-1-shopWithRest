@@ -29,4 +29,12 @@ public class ProductRepo {
     public void addProduct(Product product) {
         products.put(product.id(), product);
     }
+
+    public void deleteProduct(int id) {
+        Product product = products.get(id);
+        if (product == null) {
+            throw new NoSuchElementException("No product with id " + id + " found in this product repo.");
+        }
+        products.remove(id);
+    }
 }

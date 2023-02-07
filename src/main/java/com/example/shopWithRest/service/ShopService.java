@@ -51,4 +51,14 @@ public class ShopService {
         productRepo.addProduct(product);
         return productRepo.getProduct(product.id());
     }
+
+    public List<Order> deleteProduct(int id) {
+        Product productToDelete = getProduct(id);
+        List<Order> affectedOrders = listOrders().stream()
+                .filter(o -> o.products().contains(productToDelete))
+                .toList();
+        affectedOrders.stream().forEach(o -> o.products().remove(productToDelete));
+        productRepo.deleteProduct(id);
+        return affectedOrders;
+    }
 }
