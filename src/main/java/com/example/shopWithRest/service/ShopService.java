@@ -24,7 +24,7 @@ public class ShopService {
         return productRepo.listProducts();
     }
 
-    public void addOrder(int orderId, List<Integer> productIds) {
+    public Order addOrder(int orderId, List<Integer> productIds) {
         List<Product> products = new ArrayList<>();
         for (int productId : productIds) {
             Product product = productRepo.getProduct(productId);
@@ -33,6 +33,7 @@ public class ShopService {
 
         Order order = new Order(orderId, products);
         orderRepo.addOrder(order);
+        return getOrder(orderId);
     }
 
     public Order getOrder(int orderId) {
