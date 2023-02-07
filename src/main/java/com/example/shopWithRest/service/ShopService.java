@@ -42,4 +42,13 @@ public class ShopService {
     public List<Order> listOrders() {
         return orderRepo.listOrders();
     }
+
+    public Order deleteOrder(int id) {
+        return orderRepo.deleteOrder(id);
+    }
+
+    public Product addProduct(Product product) {
+        productRepo.addProduct(product);
+        return productRepo.getProduct(product.id());
+    }
 }

@@ -23,4 +23,8 @@ public class OrderRepo {
     public List<Order> listOrders() {
         return new ArrayList<>(orders.values());
     }
+
+    public Order deleteOrder(int id) {
+        return orders.remove(id);
+    }
 }

@@ -24,6 +24,11 @@ public class ShopController {
         return shopService.getProduct(id);
     }
 
+    @PostMapping("products/new")
+    public Product addProduct(@RequestBody Product product) {
+        return shopService.addProduct(product);
+    }
+
     @GetMapping("orders")
     public List<Order> listOrders() {
         return shopService.listOrders();
@@ -35,7 +40,14 @@ public class ShopController {
     }
 
     @PostMapping("orders/{id}")
-    public void addOrder(@PathVariable int id, @RequestBody List<Integer> productIds) {
+    public Order addOrder(@PathVariable int id, @RequestBody List<Integer> productIds) {
         shopService.addOrder(id, productIds);
+        // TODO: Ist das hier besser aufgehoben, oder im Service???
+        return getOrder(id);
+    }
+
+    @DeleteMapping("orders/{id}")
+    public Order deleteOrder(@PathVariable int id) {
+        return shopService.deleteOrder(id);
     }
 }
