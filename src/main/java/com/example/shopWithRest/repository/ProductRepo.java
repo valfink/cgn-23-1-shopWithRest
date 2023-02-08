@@ -26,8 +26,9 @@ public class ProductRepo {
         return new ArrayList<>(products.values());
     }
 
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
         products.put(product.id(), product);
+        return product;
     }
 
     public void deleteProduct(int id) {

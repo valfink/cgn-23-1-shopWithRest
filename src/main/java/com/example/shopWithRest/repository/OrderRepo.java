@@ -12,8 +12,9 @@ import java.util.Map;
 public class OrderRepo {
     private final Map<Integer, Order> orders = new HashMap<>();
 
-    public void addOrder(Order order) {
+    public Order addOrder(Order order) {
         orders.put(order.id(), order);
+        return order;
     }
 
     public Order getOrder(int orderId) {

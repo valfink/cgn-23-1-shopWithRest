@@ -47,8 +47,6 @@ public class ShopController {
     @PostMapping("orders/{id}")
     public Order addOrder(@PathVariable int id, @RequestBody List<Integer> productIds) {
         return shopService.addOrder(id, productIds);
-        // TODO: Ist das hier besser aufgehoben, oder im Service???
-        // return getOrder(id);
     }
 
     @DeleteMapping("orders/{id}")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +33,7 @@ public class ShopService {
         }
 
         Order order = new Order(orderId, products);
-        orderRepo.addOrder(order);
-        return getOrder(orderId);
+        return orderRepo.addOrder(order);
     }
 
     public Order getOrder(int orderId) {
@@ -45,12 +45,14 @@ public class ShopService {
     }
 
     public Order deleteOrder(int id) {
+        if (getOrder(id) == null) {
+            throw new NoSuchElementException("Order with id " + id + " does not exist!");
+        }
         return orderRepo.deleteOrder(id);
     }
 
     public Product addProduct(Product product) {
-        productRepo.addProduct(product);
-        return productRepo.getProduct(product.id());
+        return productRepo.addProduct(product);
     }
 
     public List<Order> deleteProduct(int id) {
