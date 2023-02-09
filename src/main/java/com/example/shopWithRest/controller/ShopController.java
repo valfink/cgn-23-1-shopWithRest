@@ -53,4 +53,9 @@ public class ShopController {
     public Order deleteOrder(@PathVariable int id) {
         return shopService.deleteOrder(id);
     }
+
+    @PostMapping("orders/newById/{id}")
+    public Order addOrderById(@PathVariable int id) {
+        return shopService.addOrderById(id);
+    }
 }
