@@ -31,7 +31,7 @@ public class ProductRepo {
         return product;
     }
 
-    public void deleteProduct(String id) {
+    public Product deleteProduct(String id) {
         Product product = products.get(id);
         if (product == null) {
             throw new NoSuchElementException("No product with id " + id + " found in this product repo.");
