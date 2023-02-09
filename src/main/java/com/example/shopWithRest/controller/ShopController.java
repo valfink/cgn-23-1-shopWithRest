@@ -20,7 +20,7 @@ public class ShopController {
     }
 
     @GetMapping("products/{id}")
-    public Product getProduct(@PathVariable int id) {
+    public Product getProduct(@PathVariable String id) {
         return shopService.getProduct(id);
     }
 
@@ -30,7 +30,7 @@ public class ShopController {
     }
 
     @DeleteMapping("products/{id}")
-    public List<Order> deleteProduct(@PathVariable int id) {
+    public List<Order> deleteProduct(@PathVariable String id) {
         return shopService.deleteProduct(id);
     }
 
