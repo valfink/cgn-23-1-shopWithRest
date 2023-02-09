@@ -7,14 +7,14 @@ import java.util.*;
 
 @Repository
 public class ProductRepo {
-    private final Map<Integer, Product> products = new HashMap<>(Map.of(
-            1, new Product(1, "Apfel"),
-            2, new Product(2, "Banane"),
-            3, new Product(3, "Zitrone"),
-            4, new Product(4, "Mandarine")
+    private final Map<String, Product> products = new HashMap<>(Map.of(
+            "1", new Product("1", "Apfel"),
+            "2", new Product("2", "Banane"),
+            "3", new Product("3", "Zitrone"),
+            "4", new Product("4", "Mandarine")
     ));
 
-    public Product getProduct(int id) {
+    public Product getProduct(String id) {
         Product product = products.get(id);
         if (product == null) {
             throw new NoSuchElementException("No product with id " + id + " found in this product repo.");
@@ -31,7 +31,7 @@ public class ProductRepo {
         return product;
     }
 
-    public void deleteProduct(int id) {
+    public void deleteProduct(String id) {
         Product product = products.get(id);
         if (product == null) {
             throw new NoSuchElementException("No product with id " + id + " found in this product repo.");

@@ -10,14 +10,14 @@ import java.util.Map;
 
 @Repository
 public class OrderRepo {
-    private final Map<Integer, Order> orders = new HashMap<>();
+    private final Map<String, Order> orders = new HashMap<>();
 
     public Order addOrder(Order order) {
         orders.put(order.id(), order);
         return order;
     }
 
-    public Order getOrder(int orderId) {
+    public Order getOrder(String orderId) {
         return orders.get(orderId);
     }
 
@@ -25,7 +25,7 @@ public class OrderRepo {
         return new ArrayList<>(orders.values());
     }
 
-    public Order deleteOrder(int id) {
+    public Order deleteOrder(String id) {
         return orders.remove(id);
     }
 }

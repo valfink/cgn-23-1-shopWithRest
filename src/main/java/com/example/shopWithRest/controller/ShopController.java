@@ -40,22 +40,22 @@ public class ShopController {
     }
 
     @GetMapping("orders/{id}")
-    public Order getOrder(@PathVariable int id) {
+    public Order getOrder(@PathVariable String id) {
         return shopService.getOrder(id);
     }
 
-    @PostMapping("orders/{id}")
-    public Order addOrder(@PathVariable int id, @RequestBody List<Integer> productIds) {
-        return shopService.addOrder(id, productIds);
+    @PostMapping("orders/new")
+    public Order addOrder(@RequestBody List<String> productIds) {
+        return shopService.addOrder(productIds);
     }
 
     @DeleteMapping("orders/{id}")
-    public Order deleteOrder(@PathVariable int id) {
+    public Order deleteOrder(@PathVariable String id) {
         return shopService.deleteOrder(id);
     }
 
     @PostMapping("orders/newById/{id}")
-    public Order addOrderById(@PathVariable int id) {
+    public Order addOrderById(@PathVariable String id) {
         return shopService.addOrderById(id);
     }
 }

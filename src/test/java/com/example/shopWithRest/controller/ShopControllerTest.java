@@ -89,26 +89,26 @@ class ShopControllerTest {
     @Test
     @DirtiesContext
     void listOrders() throws Exception {
-        orderRepo.addOrder(new Order(1, new ArrayList<>(List.of(new Product(1, "Banane")))));
+        orderRepo.addOrder(new Order("1", new ArrayList<>(List.of(new Product("1", "Banane")))));
         mockMvc.perform(MockMvcRequestBuilders.get("/api/orders"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                                      [ 
-                                     {"id": 1, "products": [{"id": 1, "name": "Banane"}]}
+                                     {"id": "1", "products": [{"id": 1, "name": "Banane"}]}
                                      ]"""));
                                   }
 
     @Test
     @DirtiesContext
     void getOrder() throws Exception {
-        orderRepo.addOrder(new Order(1, new ArrayList<>(List.of(new Product(1, "Banane")))));
+        orderRepo.addOrder(new Order("1", new ArrayList<>(List.of(new Product("1", "Banane")))));
         mockMvc.perform(MockMvcRequestBuilders.get("/api/orders/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                 {
-                    "id":1,
+                    "id":"1",
                     "products":[
-                        {"id":1,"name":"Banane"}
+                        {"id":"1","name":"Banane"}
                     ]
                 }
 """));
@@ -133,12 +133,12 @@ class ShopControllerTest {
     @Test
     @DirtiesContext
     void deleteOrder() throws Exception {
-        orderRepo.addOrder(new Order(1, new ArrayList<>(List.of(new Product(1, "Banane")))));
+        orderRepo.addOrder(new Order("1", new ArrayList<>(List.of(new Product("1", "Banane")))));
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/orders/1"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
-                {"id": 1,
-                "products": [{"id": 1, "name": "Banane"}]
+                {"id": "1",
+                "products": [{"id": "1", "name": "Banane"}]
                 }
                 """));
 

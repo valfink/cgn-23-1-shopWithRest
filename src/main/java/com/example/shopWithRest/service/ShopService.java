@@ -19,8 +19,9 @@ public class ShopService {
     private final ProductRepo productRepo;
     private final OrderRepo orderRepo;
     private final WebClient webClient = WebClient.create("https://my-json-server.typicode.com/Flooooooooooorian/OrderApi");
+    private final IdService idService;
 
-    public Product getProduct(int id) {
+    public Product getProduct(String id) {
         return productRepo.getProduct(id);
     }
 
@@ -28,18 +29,18 @@ public class ShopService {
         return productRepo.listProducts();
     }
 
-    public Order addOrder(int orderId, List<Integer> productIds) {
+    public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();
-        for (int productId : productIds) {
+        for (String productId : productIds) {
             Product product = productRepo.getProduct(productId);
             products.add(product);
         }
 
-        Order order = new Order(orderId, products);
+        Order order = new Order(idService.generateId(), products);
         return orderRepo.addOrder(order);
     }
 
-    public Order getOrder(int orderId) {
+    public Order getOrder(String orderId) {
         return orderRepo.getOrder(orderId);
     }
 
@@ -47,7 +48,7 @@ public class ShopService {
         return orderRepo.listOrders();
     }
 
-    public Order deleteOrder(int id) {
+    public Order deleteOrder(String id) {
         if (getOrder(id) == null) {
             throw new NoSuchElementException("Order with id " + id + " does not exist!");
         }
@@ -55,10 +56,11 @@ public class ShopService {
     }
 
     public Product addProduct(Product product) {
-        return productRepo.addProduct(product);
+        Product productWithId = new Product(idService.generateId(), product.name());
+        return productRepo.addProduct(productWithId);
     }
 
-    public List<Order> deleteProduct(int id) {
+    public List<Order> deleteProduct(String id) {
         Product productToDelete = getProduct(id);
         List<Order> affectedOrders = listOrders().stream()
                 .filter(o -> o.products().contains(productToDelete))
@@ -68,7 +70,7 @@ public class ShopService {
         return affectedOrders;
     }
 
-    public Order addOrderById(int id) {
+    public Order addOrderById(String id) {
         Order order = Objects.requireNonNull(webClient.get()
                 .uri("/orders/" + id)
                 .retrieve()

@@ -1,7 +1,7 @@
 package com.example.shopWithRest.model;
 
 public record Product(
-        int id,
+        String id,
         String name
 ) {
 }
