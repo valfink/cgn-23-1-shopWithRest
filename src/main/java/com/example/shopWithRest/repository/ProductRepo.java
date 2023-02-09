@@ -36,6 +36,6 @@ public class ProductRepo {
         if (product == null) {
             throw new NoSuchElementException("No product with id " + id + " found in this product repo.");
         }
-        products.remove(id);
+        return products.remove(id);
     }
 }
